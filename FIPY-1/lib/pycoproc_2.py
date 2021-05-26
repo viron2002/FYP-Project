@@ -296,14 +296,17 @@ class Pycoproc:
 
     def calibrate_rtc(self):
         # the 1.024 factor is because the PIC LF operates at 31 KHz
-        (Ñ\ÈHœ™\]Y[˜ÞH]šY\ˆÈÙ[™\˜]HH\ÃBˆÈ[™[ˆ\™H\ÈHš[˜\žH™\ØØ[\‹K™Ë‹K‹‹‹ˆLL‹L\ÃBˆÈ[˜ÙHH™YY›ÜˆHÛÛœÝ[BˆÙ[‹—ÝÜš]Jž]\ÊÐÓQÐÐSP”UWJKØZ]Q˜[ÙJCBˆÙ[‹šL˜Ë™Z[š]
-
-CBˆ[Š	ÔŒIË[ÙOT[‹’SŠCBˆ[Ù\ÈHXÛÛKœ[Ù\×ÙÙ]
-	ÔŒIËL
-CBˆÙ[‹šL˜Ëš[š]
-[ÙORLË“PTÕT‹[œÏJÙ[‹œÙKÙ[‹œØÛ
-K˜]Y˜]OLL
-CBˆYHBˆ›ÜˆH[ˆ˜[™ÙJ[Š[Ù\ÊJNƒBˆYˆ[es[i][1] > EXP_RTC_PERIOD:
+        # WDT has a frequency divider to generate 1 ms
+        # and then there is a binary prescaler, e.g., 1, 2, 4 ... 512, 1024 ms
+        # hence the need for the constant
+        self._write(bytes([CMD_CALIBRATE]), wait=False)
+        self.i2c.deinit()
+        Pin('P21', mode=Pin.IN)
+        pulses = pycom.pulses_get('P21', 100)
+        self.i2c.init(mode=I2C.MASTER, pins=(self.sda, self.scl), baudrate=100000)
+        idx = 0
+        for i in range(len(pulses)):
+            if pulses[i][1] > EXP_RTC_PERIOD:
                 idx = i
                 break
         try:

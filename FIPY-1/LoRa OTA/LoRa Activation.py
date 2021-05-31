@@ -4,7 +4,7 @@ import time
 import ubinascii
 
 # Initialise LoRa in LORAWAN mode.
-lora = LoRa(mode=LoRa.LORAWAN, region=LoRa.AS923)
+lora = LoRa(mode=LoRa.LORAWAN, region=LoRa.EU868)
 
 # create an OTAA authentication parameters, change them to the provided credentials
 app_eui = ubinascii.unhexlify('70B3D57ED0043226')
@@ -14,7 +14,7 @@ dev_eui = ubinascii.unhexlify('70B3D549973C0AE1')
 # join a network using OTAA (Over the Air Activation)
 #uncomment below to use LoRaWAN application provided dev_eui
 
-lora.join(activation=LoRa.OTAA, auth=(app_eui, app_key), timeout=0)
+lora.join(activation=LoRa.OTAA, auth=(dev_eui, app_eui, app_key), timeout=0)
 
 # wait until the module has joined the network
 while not lora.has_joined():

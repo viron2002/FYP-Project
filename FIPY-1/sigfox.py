@@ -31,7 +31,8 @@ s.setsockopt(socket.SOL_SIGFOX, socket.SO_RX, False)
 # send some bytes
 #i=0
 #while i < 11:
-s.send(float(str(SI7006A20().temperature())))
+s.send(str(SI7006A20().temperature()))
+print(str(SI7006A20().temperature()))
 #s.send(str(SI7006A20().humidity()))
 #pybytes.send_signal(1, str(lt.temperature()))
 #s.send(str(lt.humidity()))

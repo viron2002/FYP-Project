@@ -7,5 +7,3 @@ if pybytes is not None:
             pkt = "Hello, from " + str(pymesh.mac())
             pybytes.send_signal(1, pkt)
             time.sleep(20)
-
-print("Hello World")

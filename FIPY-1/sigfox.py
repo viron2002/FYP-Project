@@ -28,16 +28,9 @@ s.setblocking(True)
 # configure it as uplink only
 s.setsockopt(socket.SOL_SIGFOX, socket.SO_RX, False)
 
-# send some bytes
-#i=0
-#while i < 11:
+# send data
+# to sigfox 
 s.send(str(SI7006A20().temperature()))
+# to display 
 print(str(SI7006A20().temperature()))
-#s.send(str(SI7006A20().humidity()))
-#pybytes.send_signal(1, str(lt.temperature()))
-#s.send(str(lt.humidity()))
-#s.send(SI7006A20.humidity().humidity)
-#s.send("{:.2f}".format(lt.humidity()))
-    #time.sleep(300)
 
- #   i+1

@@ -1,4 +1,7 @@
+from class1 import abc
 
-x = input("Select a name: ")
-if x == "1":
-    print("yeaaa")
+connection_status()
+print("")
+display()
+print("")
+wifiAP()

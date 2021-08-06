@@ -28,9 +28,6 @@ s.setblocking(True)
 # configure it as uplink only
 s.setsockopt(socket.SOL_SIGFOX, socket.SO_RX, False)
 
-# send data
-# to sigfox 
-s.send(str(SI7006A20().temperature()))
-# to display 
-print(str(SI7006A20().temperature()))
-
+s.send(str(lt.temperature()))
+print(lt.temperature())
+print(lt.humidity())

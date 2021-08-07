@@ -1,4 +1,4 @@
-from network import Sigfox
+"""from network import Sigfox
 import binascii
 import socket
 import machine
@@ -26,4 +26,4 @@ s.setblocking(True)
 s.setsockopt(socket.SOL_SIGFOX, socket.SO_RX, False)
 
 # send some bytes
-s.send("hello")
+s.send("hello")"""
